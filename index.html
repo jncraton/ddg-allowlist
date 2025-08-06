@@ -37,6 +37,7 @@ clevelandclinic.org</textarea
           <label
             ><input id="assist" type="checkbox" />Disable AI Assistance</label
           >
+          <label><input id="no_ads" type="checkbox" />Disable Ads</label>
         </details>
       </section>
     </main>
@@ -50,6 +51,9 @@ clevelandclinic.org</textarea
         if (assist.checked) {
           features += 'assist=false&'
         }
+        if (no_ads.checked) {
+          features += 'k1=-1&'
+        }
         base_url = encodeURI(
           `https://duckduckgo.com/?${features}q=${sites_exp}`,
         )
@@ -60,6 +64,7 @@ clevelandclinic.org</textarea
       sites.addEventListener('input', update)
       query.addEventListener('input', update)
       assist.addEventListener('input', update)
+      no_ads.addEventListener('input', update)
 
       bookmark.addEventListener('input', () => {
         sites_list = [
