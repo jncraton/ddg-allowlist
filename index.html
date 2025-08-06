@@ -13,10 +13,17 @@
   </head>
 
   <body>
-    <label>Sites (white space separated)<textarea id=sites rows=16></textarea></label>
-    <label>Query<input id=query></input></label>
-    <a href="#" id=search_link role=button>Search</a>
-    <label>Smart bookmark URL<input id=bookmark readonly></input></label>
+    <main>
+      <section>
+      <label>Sites (white space separated)<textarea id=sites rows=16>mayoclinic.org
+clevelandclinic.org</textarea></label>
+      <label>Query<input id=query value=fever></input></label>
+      <a href="#" id=search_link role=button>Search</a>
+      </section>
+      <section>
+      <label>Smart bookmark URL<input id=bookmark readonly></input></label>
+      </section>
+    </main>
     <script>
     const update = () => {
       sites_list = sites.value.split(/[\n\t ]+/)
@@ -30,6 +37,7 @@
     
     sites.addEventListener('input', update)
     query.addEventListener('input', update)
+    update()
     </script>
   </body>
 </html>
