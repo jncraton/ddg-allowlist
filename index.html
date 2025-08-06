@@ -23,7 +23,9 @@
       sites_list = sites_list.filter(str => str.trim())
       sites_list = sites_list.map(s => `site:${s}`)
       sites_exp = `( ${sites_list.join(' || ')} )`
-      bookmark.value = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`) + '+%s'
+      base_url = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`)
+      bookmark.value = base_url + '+%s'
+      search_link.href = base_url + '+' + encodeURIComponent(query.value)
     }
     
     sites.addEventListener('input', update)
