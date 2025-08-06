@@ -43,7 +43,7 @@ clevelandclinic.org</textarea></label>
     query.addEventListener('input', update)
 
     bookmark.addEventListener('input', () => {
-      sites_list = [...bookmark.value.matchAll(/site:(.+?)%/g)].map(i => i[1])
+      sites_list = [...bookmark.value.matchAll(/site(:|%3A)(.+?)(%|\)|\+)/g)].map(i => i[2])
       sites.value = sites_list.join('\n')
     })
 
