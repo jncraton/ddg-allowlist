@@ -34,6 +34,9 @@ clevelandclinic.org</textarea
             >
             URL<input id="bookmark"
           /></label>
+          <label
+            ><input id="assist" type="checkbox" />Disable AI Assistance</label
+          >
         </details>
       </section>
     </main>
@@ -43,13 +46,20 @@ clevelandclinic.org</textarea
         sites_list = sites_list.filter(str => str.trim())
         sites_list = sites_list.map(s => `site:${s}`)
         sites_exp = `( ${sites_list.join(' || ')} )`
-        base_url = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`)
+        let features = ''
+        if (assist.checked) {
+          features += 'assist=false&'
+        }
+        base_url = encodeURI(
+          `https://duckduckgo.com/?${features}q=${sites_exp}`,
+        )
         bookmark.value = base_url + '+%s'
         search_link.href = base_url + '+' + encodeURIComponent(query.value)
       }
 
       sites.addEventListener('input', update)
       query.addEventListener('input', update)
+      assist.addEventListener('input', update)
 
       bookmark.addEventListener('input', () => {
         sites_list = [
