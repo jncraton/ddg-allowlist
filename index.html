@@ -24,7 +24,7 @@ clevelandclinic.org</textarea></label>
       <section>
       <details>
         <summary>Advanced Features</summary>
-          <label><a href="https://en.wikipedia.org/wiki/Smart_bookmark">Smart bookmark</a> URL<input id=bookmark readonly></input></label>
+          <label><a href="https://en.wikipedia.org/wiki/Smart_bookmark">Smart bookmark</a> URL<input id=bookmark></input></label>
       </details>
       </section>
     </main>
@@ -41,6 +41,12 @@ clevelandclinic.org</textarea></label>
     
     sites.addEventListener('input', update)
     query.addEventListener('input', update)
+
+    bookmark.addEventListener('input', () => {
+      sites_list = [...bookmark.value.matchAll(/site:(.+?)%/g)].map(i => i[1])
+      sites.value = sites_list.join('\n')
+    })
+
     update()
     </script>
   </body>
