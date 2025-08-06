@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -8,7 +8,7 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
-    >
+    />
     <style></style>
   </head>
 
@@ -16,38 +16,49 @@
     <main>
       <h1>Duck Duck Go Search Allowlist</h1>
       <section>
-      <label>Query<input id=query value=fever/></label>
-      <label>Sites (whitespace separated)<textarea id=sites rows=6>mayoclinic.org
-clevelandclinic.org</textarea></label>
-      <a href="#" id=search_link role=button>Search</a>
+        <label>Query<input id="query" value="fever" /></label>
+        <label
+          >Sites (whitespace separated)<textarea id="sites" rows="6">
+mayoclinic.org
+clevelandclinic.org</textarea
+          >
+        </label>
+        <a href="#" id="search_link" role="button">Search</a>
       </section>
       <section>
-      <details>
-        <summary>Advanced Features</summary>
-          <label><a href="https://en.wikipedia.org/wiki/Smart_bookmark">Smart bookmark</a> URL<input id=bookmark/></label>
-      </details>
+        <details>
+          <summary>Advanced Features</summary>
+          <label
+            ><a href="https://en.wikipedia.org/wiki/Smart_bookmark"
+              >Smart bookmark</a
+            >
+            URL<input id="bookmark"
+          /></label>
+        </details>
       </section>
     </main>
     <script>
-    const update = () => {
-      sites_list = sites.value.split(/[\n\t ]+/)
-      sites_list = sites_list.filter(str => str.trim())
-      sites_list = sites_list.map(s => `site:${s}`)
-      sites_exp = `( ${sites_list.join(' || ')} )`
-      base_url = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`)
-      bookmark.value = base_url + '+%s'
-      search_link.href = base_url + '+' + encodeURIComponent(query.value)
-    }
-    
-    sites.addEventListener('input', update)
-    query.addEventListener('input', update)
+      const update = () => {
+        sites_list = sites.value.split(/[\n\t ]+/)
+        sites_list = sites_list.filter(str => str.trim())
+        sites_list = sites_list.map(s => `site:${s}`)
+        sites_exp = `( ${sites_list.join(' || ')} )`
+        base_url = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`)
+        bookmark.value = base_url + '+%s'
+        search_link.href = base_url + '+' + encodeURIComponent(query.value)
+      }
 
-    bookmark.addEventListener('input', () => {
-      sites_list = [...bookmark.value.matchAll(/site(:|%3A)(.+?)(%|\)|\+)/g)].map(i => i[2])
-      sites.value = sites_list.join('\n')
-    })
+      sites.addEventListener('input', update)
+      query.addEventListener('input', update)
 
-    update()
+      bookmark.addEventListener('input', () => {
+        sites_list = [
+          ...bookmark.value.matchAll(/site(:|%3A)(.+?)(%|\)|\+)/g),
+        ].map(i => i[2])
+        sites.value = sites_list.join('\n')
+      })
+
+      update()
     </script>
   </body>
 </html>
