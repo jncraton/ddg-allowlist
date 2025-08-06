@@ -18,13 +18,15 @@
     <a href="#" id=search_link role=button>Search</a>
     <label>Smart bookmark URL<input id=bookmark readonly></input></label>
     <script>
-    sites.addEventListener('input', () => {
+    const update = () => {
       sites_list = sites.value.split(/[\n\t ]+/)
       sites_list = sites_list.filter(str => str.trim())
       sites_list = sites_list.map(s => `site:${s}`)
       sites_exp = `( ${sites_list.join(' || ')} )`
       bookmark.value = encodeURI(`https://duckduckgo.com/?q=${sites_exp}`) + '+%s'
-    })
+    }
+    
+    sites.addEventListener('input', update)
     </script>
   </body>
 </html>
