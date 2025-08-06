@@ -64,6 +64,11 @@ clevelandclinic.org</textarea
       query.addEventListener('input', update)
       assist.addEventListener('input', update)
       no_ads.addEventListener('input', update)
+      query.addEventListener('keyup', e => {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+          search_link.click()
+        }
+      })
 
       bookmark.addEventListener('input', () => {
         sites_list = [
