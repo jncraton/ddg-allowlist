@@ -54,7 +54,7 @@ clevelandclinic.org</textarea
         sites_list = sites.value.split(/[\n\t ]+/)
         sites_list = sites_list.filter(str => str.trim())
         sites_list = sites_list.map(s => `site:${s}`)
-        sites_exp = `( ${sites_list.join(' || ')} )`
+        sites_exp = `(${sites_list.join(' || ')})`
         let features = ''
         if (assist.checked) {
           features += 'assist=false&'
